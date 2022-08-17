@@ -5,12 +5,23 @@ const { graphql, buildSchema } = require('graphql');
 const schema = buildSchema(`
     type Query {
         hello: String
+        saludo: String
     }
 `)
 
+const resolvers = {
+    hello: () => {
+        return 'Hola Mundo'
+    },
+    saludo: () => {
+        return 'Hola a Todos'
+    }
+}
+
 graphql({
     schema: schema,
-    source: '{ hello }'
+    source: '{ saludo }',
+    rootValue: resolvers
 })
     .then((data) => {
         console.log(data);
